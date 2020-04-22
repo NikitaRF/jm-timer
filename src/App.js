@@ -19,7 +19,7 @@ class App extends React.Component {
       clearInterval(this.timerId)
       this.timerId = undefined
     } else {
-      this.timerId = setInterval(this.mSecInc, 1)
+      this.timerId = setInterval(this.mSecInc, 10)
     }
   }
 
@@ -50,7 +50,7 @@ class App extends React.Component {
     this.setState({
       min: min,
       sec: sec,
-      mSec: mSec + 1,
+      mSec: mSec + 10,
     })
   }
 
