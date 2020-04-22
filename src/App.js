@@ -46,7 +46,7 @@ class App extends React.Component {
       sec = 0;
     }
     // let sec = Math.floor(mSec % 60000 / 1000)
-    // let minutes = Math.floor(mSec / 60000)
+    // let minutes = Math.floor(mSec / 60000) 11zx11
     this.setState({
       min: min,
       sec: sec,
