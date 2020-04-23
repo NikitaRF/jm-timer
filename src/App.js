@@ -65,7 +65,7 @@ class App extends React.Component {
             Start/Pause
           </Button>
           <Button className='button' onClick={this.stop} type="primary" size="small" >
-            Stop
+            Clear
           </Button>
         </div>
     )

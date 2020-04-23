@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 
+
 class Countdown extends React.Component {
     constructor(props) {
         super(props);
@@ -8,6 +9,7 @@ class Countdown extends React.Component {
             min: 0,
             sec: 0,
             startTimer: false,
+            countOfPlay: 1,
         }
     }
 
@@ -23,8 +25,6 @@ class Countdown extends React.Component {
                 sec: props.sec,
             }
         }
-
-
     }
 
     startCountdown = () => {
@@ -58,6 +58,7 @@ class Countdown extends React.Component {
         if (min === 0 && sec === 0){
             clearInterval(this.timerId)
             this.timerId = undefined
+            this.StartPlaySound()
         } else {
             this.setState({
                 min: min,
@@ -67,11 +68,29 @@ class Countdown extends React.Component {
         }
     }
 
+    playSound = () => {
+        const { countOfPlay } = this.state;
+        console.log("Время вышло!!!")
+        this.setState({ countOfPlay: countOfPlay + 1 })
+
+        if (countOfPlay === 2){
+            this.setState({ countOfPlay: 1 })
+            clearInterval(this.soundId)
+            this.soundId = undefined;
+        }
+    }
+
+    StartPlaySound = () => {
+        this.soundId = setInterval(this.playSound, 1000)
+    }
+
     render() {
     const { min, sec } = this.state;
 
         return (
             <div>
+
+
                 <div className='time'>
                     {min} : {sec}
                 </div>
@@ -79,14 +98,11 @@ class Countdown extends React.Component {
                     Start/Pause
                 </Button>
                 <Button className='button' onClick={this.stopCountdown} type="primary" size="small" >
-                    Stop
+                    Clear
                 </Button>
             </div>
         )
-
     }
-
-
 }
 
 export default Countdown;
