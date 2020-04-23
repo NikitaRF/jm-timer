@@ -33,9 +33,8 @@ class App extends React.Component {
   }
 
   mSecInc = () => {
-    let { mSec } = this.state;
-    let sec = this.state.sec ;
-    let min = this.state.min;
+    let { mSec, sec, min } = this.state;
+
     if ( mSec === 1000) {
       sec += 1;
       mSec = 0;

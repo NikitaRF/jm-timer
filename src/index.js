@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Countdown from './Countdown.js'
+import InputTime from './InputTime.js';
 
 
 ReactDOM.render(
     <>
-    <App />,
-    <Countdown />,
+    <App />
+    <InputTime />
     </>,
 
     document.getElementById('root')
