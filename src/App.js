@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
@@ -46,7 +45,7 @@ class App extends React.Component {
       sec = 0;
     }
     // let sec = Math.floor(mSec % 60000 / 1000)
-    // let minutes = Math.floor(mSec / 60000) 11zx1111
+    // let minutes = Math.floor(mSec / 60000)
     this.setState({
       min: min,
       sec: sec,
@@ -54,7 +53,10 @@ class App extends React.Component {
     })
   }
 
+
+
   render() {
+
     const { min, sec, mSec } = this.state;
 
     return (
