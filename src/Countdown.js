@@ -41,10 +41,8 @@ class Countdown extends React.Component {
         }
 
         if (min === 0 && sec === 0){
-
             clearInterval(this.timerId)
             this.timerId = undefined
-
         } else {
             this.setState({
                 min: min,
