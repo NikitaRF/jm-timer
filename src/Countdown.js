@@ -10,14 +10,31 @@ class Countdown extends React.Component {
         this.state = {
             min: 0,
             sec: 0,
+            startTimer: false,
         }
     }
 
+    static getDerivedStateFromProps(props, state){
+        if (state.startTimer !== false){
+            return {
+                min: state.min,
+                sec: state.sec,
+            }
+        } else {
+            return {
+                min: props.min,
+                sec: props.sec,
+            }
+        }
+
+
+    }
 
     startCountdown = () => {
         if (this.timerId) {
             clearInterval(this.timerId)
             this.timerId = undefined
+
         } else {
             this.timerId = setInterval(this.secDec, 1000)
         }
@@ -29,6 +46,7 @@ class Countdown extends React.Component {
         this.setState({
             min: 0,
             sec: 0,
+            startTimer: false,
         })
     }
 
@@ -47,6 +65,7 @@ class Countdown extends React.Component {
             this.setState({
                 min: min,
                 sec: sec - 1,
+                startTimer: true,
             })
         }
     }
