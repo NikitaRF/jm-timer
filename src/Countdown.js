@@ -1,9 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
 
-
-
-
 class Countdown extends React.Component {
     constructor(props) {
         super(props);
