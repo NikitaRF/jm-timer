@@ -14,6 +14,9 @@ class Countdown extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state){
+        let currentSecounds = props.sec;
+        let minutes = Math.floor(currentSecounds / 60);
+        let secounds = currentSecounds - (minutes * 60);
         if (state.startTimer !== false){
             return {
                 min: state.min,
@@ -21,11 +24,12 @@ class Countdown extends React.Component {
             }
         } else {
             return {
-                min: props.min,
-                sec: props.sec,
+                min: minutes,
+                sec: secounds,
             }
         }
     }
+
 
     startCountdown = () => {
         if (this.timerId) {
@@ -89,8 +93,6 @@ class Countdown extends React.Component {
 
         return (
             <div>
-
-
                 <div className='time'>
                     {min} : {sec}
                 </div>
