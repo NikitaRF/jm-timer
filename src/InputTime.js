@@ -15,10 +15,23 @@ class InputTime extends React.Component {
     };
 
     onChangeSec = value => {
+
         this.setState({
             inputValueSec: value,
         });
     };
+
+    onChangeSecOnInput = (e) => {
+        this.setState({
+            inputValueSec: e.target.value,
+        });
+    }
+
+    onChangeMinOnInput = (e) => {
+        this.setState({
+            inputValueMin: e.target.value,
+        });
+    }
 
     render() {
         const { inputValueMin, inputValueSec } = this.state;
@@ -64,7 +77,8 @@ class InputTime extends React.Component {
                         <p>Секунды</p>
                     </Col>
                 </Row>
-                <Countdown  sec={this.state.inputValueSec}/>
+
+                <Countdown min={this.state.inputValueMin} sec={this.state.inputValueSec} />
             </div>
 
         );

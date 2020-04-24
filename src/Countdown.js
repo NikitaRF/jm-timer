@@ -9,9 +9,13 @@ class Countdown extends React.Component {
             min: 0,
             sec: 0,
             startTimer: false,
+            play: false,
             countOfPlay: 1,
         }
+
+
     }
+
 
     static getDerivedStateFromProps(props, state){
         let currentSecounds = props.sec;
@@ -75,6 +79,11 @@ class Countdown extends React.Component {
     playSound = () => {
         const { countOfPlay } = this.state;
         console.log("Время вышло!!!")
+
+        const audio = new Audio('./audio/alarm.mp3')
+        audio.play();
+
+
         this.setState({ countOfPlay: countOfPlay + 1 })
 
         if (countOfPlay === 2){
@@ -87,6 +96,8 @@ class Countdown extends React.Component {
     StartPlaySound = () => {
         this.soundId = setInterval(this.playSound, 1000)
     }
+
+
 
     render() {
     const { min, sec } = this.state;
