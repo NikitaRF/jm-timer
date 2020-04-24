@@ -51,6 +51,7 @@ class InputTime extends React.Component {
         this.setState({
             inputValueSec: 0,
             startTimer: false,
+            onStart: 0,
         })
     }
 
@@ -73,7 +74,7 @@ class InputTime extends React.Component {
         let min = Math.floor(inputValueSec / 60);
         let sec = inputValueSec - (min * 60)
 
-        let percent = Math.floor(onStart / inputValueSec * 100 - 100)
+        let percent = 100 -  Math.floor(inputValueSec * 100 / onStart)
 
         return (
             <div>
