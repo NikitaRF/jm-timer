@@ -1,11 +1,13 @@
 import React from "react";
 import { Slider, InputNumber, Row, Col } from 'antd';
 import { Button } from 'antd';
+import { Progress } from 'antd';
 
 class InputTime extends React.Component {
     state = {
         inputValueSec: 0,
         startTimer: false,
+        onStart: 0,
     };
 
     onChangeSec = value => {
@@ -28,11 +30,17 @@ class InputTime extends React.Component {
     };
 
     startCountdown = () => {
+
+        this.setState({
+            onStart: this.state.inputValueSec,
+        })
+
         if (this.timerId) {
             clearInterval(this.timerId)
             this.timerId = undefined
 
         } else {
+
             this.timerId = setInterval(this.secDec, 1000)
         }
     }
@@ -57,16 +65,15 @@ class InputTime extends React.Component {
                 inputValueSec: inputValueSec - 1,
             })
         }
-
-
-
     }
 
 
     render() {
-        const { inputValueSec } = this.state;
+        const { inputValueSec, onStart } = this.state;
         let min = Math.floor(inputValueSec / 60);
         let sec = inputValueSec - (min * 60)
+
+        let percent = Math.floor(onStart / inputValueSec * 100 - 100)
 
         return (
             <div>
@@ -109,6 +116,8 @@ class InputTime extends React.Component {
                         Clear
                     </Button>
                 </div>
+
+                <Progress type="circle" percent={percent} />
 
 
             </div>
