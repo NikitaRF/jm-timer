@@ -6,31 +6,10 @@ class Countdown extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            min: 0,
             sec: 0,
             startTimer: false,
             play: false,
             countOfPlay: 1,
-        }
-
-
-    }
-
-
-    static getDerivedStateFromProps(props, state){
-        let currentSecounds = props.sec;
-        let minutes = Math.floor(currentSecounds / 60);
-        let secounds = currentSecounds - (minutes * 60);
-        if (state.startTimer !== false){
-            return {
-                min: state.min,
-                sec: state.sec,
-            }
-        } else {
-            return {
-                min: minutes,
-                sec: secounds,
-            }
         }
     }
 
@@ -55,47 +34,47 @@ class Countdown extends React.Component {
         })
     }
 
-    secDec = () => {
-        let { sec, min } = this.state;
-
-        if (sec <= 0 && min !== 0) {
-            sec = 60;
-            min -= 1;
-        }
-
-        if (min === 0 && sec === 0){
-            clearInterval(this.timerId)
-            this.timerId = undefined
-            this.StartPlaySound()
-        } else {
-            this.setState({
-                min: min,
-                sec: sec - 1,
-                startTimer: true,
-            })
-        }
-    }
-
-    playSound = () => {
-        const { countOfPlay } = this.state;
-        console.log("Время вышло!!!")
-
-        const audio = new Audio('./audio/alarm.mp3')
-        audio.play();
-
-
-        this.setState({ countOfPlay: countOfPlay + 1 })
-
-        if (countOfPlay === 2){
-            this.setState({ countOfPlay: 1 })
-            clearInterval(this.soundId)
-            this.soundId = undefined;
-        }
-    }
-
-    StartPlaySound = () => {
-        this.soundId = setInterval(this.playSound, 1000)
-    }
+    // secDec = () => {
+    //     let { sec, min } = this.state;
+    //
+    //     if (sec <= 0 && min !== 0) {
+    //         sec = 60;
+    //         min -= 1;
+    //     }
+    //
+    //     if (min === 0 && sec === 0){
+    //         clearInterval(this.timerId)
+    //         this.timerId = undefined
+    //         this.StartPlaySound()
+    //     } else {
+    //         this.setState({
+    //             min: min,
+    //             sec: sec - 1,
+    //             startTimer: true,
+    //         })
+    //     }
+    // }
+    //
+    // playSound = () => {
+    //     const { countOfPlay } = this.state;
+    //     console.log("Время вышло!!!")
+    //
+    //     const audio = new Audio('./audio/alarm.mp3')
+    //     audio.play();
+    //
+    //
+    //     this.setState({ countOfPlay: countOfPlay + 1 })
+    //
+    //     if (countOfPlay === 2){
+    //         this.setState({ countOfPlay: 1 })
+    //         clearInterval(this.soundId)
+    //         this.soundId = undefined;
+    //     }
+    // }
+    //
+    // StartPlaySound = () => {
+    //     this.soundId = setInterval(this.playSound, 1000)
+    // }
 
 
 

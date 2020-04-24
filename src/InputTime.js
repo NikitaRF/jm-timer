@@ -4,59 +4,35 @@ import Countdown from './Countdown.js';
 
 class InputTime extends React.Component {
     state = {
-        inputValueMin: 0,
         inputValueSec: 0,
     };
 
-    onChangeMin = value => {
-        this.setState({
-            inputValueMin: value,
-        });
-    };
-
     onChangeSec = value => {
-
         this.setState({
             inputValueSec: value,
         });
     };
 
-    onChangeSecOnInput = (e) => {
+    incMin = () => {
         this.setState({
-            inputValueSec: e.target.value,
-        });
+            inputValueSec: 60 + this.state.inputValueSec,
+        })
+    }
+    incSec = () => {
+         this.setState({
+            inputValueSec: 1 + this.state.inputValueSec,
+        })
     }
 
-    onChangeMinOnInput = (e) => {
-        this.setState({
-            inputValueMin: e.target.value,
-        });
-    }
 
     render() {
-        const { inputValueMin, inputValueSec } = this.state;
+        const { inputValueSec } = this.state;
+        let min = Math.floor(inputValueSec / 60);
+        let sec = inputValueSec - (min * 60)
+
         return (
             <div>
                 <Row>
-                    {/*<Col span={12}>*/}
-                    {/*    <Slider*/}
-                    {/*        min={0}*/}
-                    {/*        max={60}*/}
-                    {/*        step={15}*/}
-                    {/*        onChange={this.onChangeMin}*/}
-                    {/*        value={typeof inputValueMin === 'number' ? inputValueMin : 0}*/}
-                    {/*    />*/}
-                    {/*</Col>*/}
-                    {/*<Col span={4}>*/}
-                    {/*    <InputNumber*/}
-                    {/*        min={0}*/}
-                    {/*        max={720}*/}
-                    {/*        style={{ margin: '0 16px' }}*/}
-                    {/*        value={inputValueMin}*/}
-                    {/*        onChange={this.onChangeMin}*/}
-                    {/*    />*/}
-                    {/*    <p>Минуты</p>*/}
-                    {/*</Col>*/}
                     <Col span={12}>
                         <Slider
                             min={0}
@@ -78,15 +54,17 @@ class InputTime extends React.Component {
                     </Col>
                 </Row>
 
-                <Countdown min={this.state.inputValueMin} sec={this.state.inputValueSec} />
+                {/*min*/}
+                <input onChange={this.incMin} type="number" value={min} />
+                {/*sec*/}
+                <input onChange={this.incSec} type="number" value={sec}/>
+
+
             </div>
 
         );
     }
 }
-
-
-
 
 
 export default InputTime;
