@@ -86,10 +86,10 @@ class Countdown extends React.Component {
                 <div className='time'>
                     {min} : {sec}
                 </div>
-                <Button className='button' onClick={this.startCountdown} type="primary" size="small" >
+                <Button className='time__input' onClick={this.startCountdown} type="primary" size="small" >
                     Start/Pause
                 </Button>
-                <Button className='button' onClick={this.stopCountdown} type="primary" size="small" >
+                <Button className='time__input' onClick={this.stopCountdown} type="primary" size="small" >
                     Clear
                 </Button>
             </div>

@@ -1,10 +1,11 @@
 import React from "react";
 import { Slider, InputNumber, Row, Col } from 'antd';
-import Countdown from './Countdown.js';
+import { Button } from 'antd';
 
 class InputTime extends React.Component {
     state = {
         inputValueSec: 0,
+        startTimer: false,
     };
 
     onChangeSec = value => {
@@ -13,15 +14,52 @@ class InputTime extends React.Component {
         });
     };
 
-    incMin = () => {
+    incMin = (e) => {
+        let min = Number(e.target.value);
+        this.setState(({ inputValueSec }) => ({ inputValueSec: inputValueSec % 60 + min * 60}))
+    }
+    incSec = (e) => {
+        let sec = Number(e.target.value);
+        this.setState(({ inputValueSec }) => ({ inputValueSec: Math.floor(inputValueSec / 60) * 60 + sec}))
+    }
+
+    handleSelect = (e) => {
+        e.target.select();
+    };
+
+    startCountdown = () => {
+        if (this.timerId) {
+            clearInterval(this.timerId)
+            this.timerId = undefined
+
+        } else {
+            this.timerId = setInterval(this.secDec, 1000)
+        }
+    }
+
+    stopCountdown = () => {
+        clearInterval(this.timerId)
+        this.timerId = undefined
         this.setState({
-            inputValueSec: 60 + this.state.inputValueSec,
+            inputValueSec: 0,
+            startTimer: false,
         })
     }
-    incSec = () => {
-         this.setState({
-            inputValueSec: 1 + this.state.inputValueSec,
-        })
+
+    secDec = () => {
+        let { inputValueSec } = this.state;
+
+        if (inputValueSec === 0) {
+            clearInterval(this.timerId)
+            this.timerId = undefined
+        } else {
+            this.setState({
+                inputValueSec: inputValueSec - 1,
+            })
+        }
+
+
+
     }
 
 
@@ -32,6 +70,15 @@ class InputTime extends React.Component {
 
         return (
             <div>
+
+                <div className='time'>
+                    {/*min*/}
+                    <input className='time__input' onClick={this.handleSelect} onChange={this.incMin} type="text" value={min} />
+                    <span> : </span>
+                    {/*sec*/}
+                    <input className='time__input' onClick={this.handleSelect} onChange={this.incSec} type="text" value={sec} />
+                </div>
+
                 <Row>
                     <Col span={12}>
                         <Slider
@@ -54,10 +101,14 @@ class InputTime extends React.Component {
                     </Col>
                 </Row>
 
-                {/*min*/}
-                <input onChange={this.incMin} type="number" value={min} />
-                {/*sec*/}
-                <input onChange={this.incSec} type="number" value={sec}/>
+                <div>
+                    <Button className='button' onClick={this.startCountdown} type="primary" size="small" >
+                        Start/Pause
+                    </Button>
+                    <Button className='button' onClick={this.stopCountdown} type="primary" size="small" >
+                        Clear
+                    </Button>
+                </div>
 
 
             </div>

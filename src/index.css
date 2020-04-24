@@ -21,3 +21,9 @@ code {
   color: #2E8AFA;
   font-size: 20px;
 }
+
+.time__input {
+  border: none;
+  width: 30px;
+  text-align: center;
+}
