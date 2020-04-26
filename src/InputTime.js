@@ -18,6 +18,9 @@ class InputTime extends React.Component {
 
     incMin = (e) => {
         let min = Number(e.target.value);
+        if (min > 720) {
+            min = 720
+        }
         this.setState(({ inputValueSec }) => ({ inputValueSec: inputValueSec % 60 + min * 60}))
     }
     incSec = (e) => {
@@ -44,9 +47,17 @@ class InputTime extends React.Component {
 
     startCountdown = () => {
         this.blockInput();
-        this.setState({
-            onStart: this.state.inputValueSec,
-        })
+        const { onStart } = this.state;
+        if (onStart === null) {
+            this.setState({
+                onStart: this.state.inputValueSec,
+            })
+        } else {
+            this.setState({
+                onStart: null,
+            })
+        }
+
 
         if (this.timerId) {
             clearInterval(this.timerId)
@@ -95,7 +106,7 @@ class InputTime extends React.Component {
         let sec = inputValueSec - (min * 60)
 
         let percent = 100 -  Math.floor(inputValueSec * 100 / onStart)
-        console.log(onStart)
+
         return (
             <div>
                 <div className='conclusionTime'>
