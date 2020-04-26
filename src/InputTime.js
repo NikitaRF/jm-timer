@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { Progress } from 'antd';
 import sound from './audio/alarm.mp3';
 
+
 class InputTime extends React.Component {
     state = {
         inputValueSec: 0,
@@ -137,6 +138,7 @@ class InputTime extends React.Component {
     }
 
     render() {
+
         const { inputValueSec, onStart } = this.state;
         let min = Math.floor(inputValueSec / 60);
         let sec = inputValueSec - (min * 60)

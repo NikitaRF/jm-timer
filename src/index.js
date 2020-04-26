@@ -4,13 +4,22 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import InputTime from './InputTime.js';
+import { Tabs } from 'antd';
+const { TabPane } = Tabs;
 
+function callback(key) {
+    console.log(key);
+}
 
 ReactDOM.render(
-    <>
-    <App />
-    <InputTime />
-    </>,
+    <Tabs defaultActiveKey="1" onChange={callback}>
+        <TabPane tab="Секундомер" key="1">
+            <App />
+        </TabPane>
+        <TabPane tab="Таймер" key="2">
+            <InputTime />
+        </TabPane>
+    </Tabs>,
 
     document.getElementById('root')
 );
