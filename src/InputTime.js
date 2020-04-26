@@ -134,7 +134,7 @@ class InputTime extends React.Component {
     }
 
     StartPlaySound = () => {
-        this.soundId = setInterval(this.playSound, 2000)
+        this.soundId = setInterval(this.playSound, 2100)
     }
 
     render() {
