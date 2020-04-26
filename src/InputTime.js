@@ -8,6 +8,7 @@ class InputTime extends React.Component {
         inputValueSec: 0,
         startTimer: false,
         onStart: null,
+        countOfPlay: 1,
     };
 
     onChangeSec = value => {
@@ -93,11 +94,46 @@ class InputTime extends React.Component {
         if (inputValueSec === 0) {
             clearInterval(this.timerId)
             this.timerId = undefined
+            this.StartPlaySound()
+            let inputs = document.querySelectorAll('.timeInput')
+            for (const i of inputs) {
+                if (i.getAttribute('disabled') !== null && i.classList.contains('timeInput--block') === true) {
+                    i.removeAttribute('disabled')
+                    i.classList.remove('timeInput--block')
+                }
+            }
+            this.setState({
+                onStart: null,
+            })
         } else {
             this.setState({
                 inputValueSec: inputValueSec - 1,
             })
         }
+    }
+
+    playSound = () => {
+        const { countOfPlay } = this.state;
+        console.log("Время вышло!!!")
+
+        const audio = new Audio('./audio/alarm.mp3')
+        console.log(audio)
+
+
+        audio.play();
+
+
+        this.setState({ countOfPlay: countOfPlay + 1 })
+
+        if (countOfPlay === 2){
+            this.setState({ countOfPlay: 1 })
+            clearInterval(this.soundId)
+            this.soundId = undefined;
+        }
+    }
+
+    StartPlaySound = () => {
+        this.soundId = setInterval(this.playSound, 1000)
     }
 
     render() {
@@ -129,6 +165,9 @@ class InputTime extends React.Component {
                     <Col span={12}>
                         <Slider
                             min={0}
+                            disabled={
+                                onStart == null ? '' : 'disabled'
+                            }
                             max={3600}
                             step={15}
                             onChange={this.onChangeSec}
