@@ -140,7 +140,6 @@ class InputTime extends React.Component {
         const { inputValueSec, onStart } = this.state;
         let min = Math.floor(inputValueSec / 60);
         let sec = inputValueSec - (min * 60)
-
         let percent = 100 -  Math.floor(inputValueSec * 100 / onStart)
 
         return (
