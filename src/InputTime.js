@@ -2,6 +2,7 @@ import React from "react";
 import { Slider, Row, Col } from 'antd';
 import { Button } from 'antd';
 import { Progress } from 'antd';
+import sound from './audio/alarm.mp3';
 
 class InputTime extends React.Component {
     state = {
@@ -92,9 +93,12 @@ class InputTime extends React.Component {
         let { inputValueSec } = this.state;
 
         if (inputValueSec === 0) {
+            console.log("Время вышло!!!")
+            const audio = new Audio(sound)
+            audio.play();
+            this.StartPlaySound()
             clearInterval(this.timerId)
             this.timerId = undefined
-            this.StartPlaySound()
             let inputs = document.querySelectorAll('.timeInput')
             for (const i of inputs) {
                 if (i.getAttribute('disabled') !== null && i.classList.contains('timeInput--block') === true) {
@@ -115,11 +119,7 @@ class InputTime extends React.Component {
     playSound = () => {
         const { countOfPlay } = this.state;
         console.log("Время вышло!!!")
-
-        const audio = new Audio('./audio/alarm.mp3')
-        console.log(audio)
-
-
+        const audio = new Audio(sound)
         audio.play();
 
 
@@ -133,7 +133,7 @@ class InputTime extends React.Component {
     }
 
     StartPlaySound = () => {
-        this.soundId = setInterval(this.playSound, 1000)
+        this.soundId = setInterval(this.playSound, 2000)
     }
 
     render() {
