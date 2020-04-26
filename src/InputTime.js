@@ -1,5 +1,5 @@
 import React from "react";
-import { Slider, InputNumber, Row, Col } from 'antd';
+import { Slider, Row, Col } from 'antd';
 import { Button } from 'antd';
 import { Progress } from 'antd';
 
@@ -7,7 +7,7 @@ class InputTime extends React.Component {
     state = {
         inputValueSec: 0,
         startTimer: false,
-        onStart: 0,
+        onStart: null,
     };
 
     onChangeSec = value => {
@@ -29,8 +29,21 @@ class InputTime extends React.Component {
         e.target.select();
     };
 
-    startCountdown = () => {
+    blockInput = () => {
+        let inputs = document.querySelectorAll('.timeInput')
+        for (const i of inputs){
+            if (i.getAttribute('disabled') == null && i.classList.contains('timeInput--block') === false){
+                i.setAttribute('disabled', 'disabled')
+                i.classList.add('timeInput--block')
+            } else {
+                i.removeAttribute('disabled')
+                i.classList.remove('timeInput--block')
+            }
+        }
+    }
 
+    startCountdown = () => {
+        this.blockInput();
         this.setState({
             onStart: this.state.inputValueSec,
         })
@@ -46,12 +59,20 @@ class InputTime extends React.Component {
     }
 
     stopCountdown = () => {
+        let inputs = document.querySelectorAll('.timeInput')
+        for (const i of inputs) {
+            if (i.getAttribute('disabled') !== null && i.classList.contains('timeInput--block') === true) {
+                i.removeAttribute('disabled')
+                i.classList.remove('timeInput--block')
+            }
+        }
+
         clearInterval(this.timerId)
         this.timerId = undefined
         this.setState({
             inputValueSec: 0,
             startTimer: false,
-            onStart: 0,
+            onStart: null,
         })
     }
 
@@ -68,23 +89,29 @@ class InputTime extends React.Component {
         }
     }
 
-
     render() {
         const { inputValueSec, onStart } = this.state;
         let min = Math.floor(inputValueSec / 60);
         let sec = inputValueSec - (min * 60)
 
         let percent = 100 -  Math.floor(inputValueSec * 100 / onStart)
-
+        console.log(onStart)
         return (
             <div>
-
-                <div className='time'>
+                <div className='conclusionTime'>
+                <div className='conclusionTime__item conclusionTime__item--time'>{min} : {sec}</div>
+                <Progress type="circle" percent={percent} />
+                </div>
+                <div className='conclusionTime__item'>
                     {/*min*/}
-                    <input className='time__input' onClick={this.handleSelect} onChange={this.incMin} type="text" value={min} />
+                    <input className='timeInput' onClick={this.handleSelect} onChange={this.incMin} type="text" value={
+                        onStart == null ? min : Math.floor(onStart / 60)
+                    } />
                     <span> : </span>
                     {/*sec*/}
-                    <input className='time__input' onClick={this.handleSelect} onChange={this.incSec} type="text" value={sec} />
+                    <input className='timeInput' onClick={this.handleSelect} onChange={this.incSec} type="text" value={
+                        onStart == null ? sec : onStart - (min * 60)
+                    } />
                 </div>
 
                 <Row>
@@ -97,16 +124,7 @@ class InputTime extends React.Component {
                             value={typeof inputValueSec === 'number' ? inputValueSec : 0}
                         />
                     </Col>
-                    <Col span={4}>
-                        <InputNumber
-                            min={0}
-                            max={3600}
-                            style={{ margin: '0 16px' }}
-                            value={inputValueSec}
-                            onChange={this.onChangeSec}
-                        />
-                        <p>Секунды</p>
-                    </Col>
+
                 </Row>
 
                 <div>
@@ -117,9 +135,6 @@ class InputTime extends React.Component {
                         Clear
                     </Button>
                 </div>
-
-                <Progress type="circle" percent={percent} />
-
 
             </div>
 

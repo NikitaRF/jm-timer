@@ -84,7 +84,7 @@ class Countdown extends React.Component {
         return (
             <div>
                 <div className='time'>
-                    {min} : {sec}
+                    {min} : {sec} 111
                 </div>
                 <Button className='time__input' onClick={this.startCountdown} type="primary" size="small" >
                     Start/Pause
