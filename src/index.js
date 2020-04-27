@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import InputTime from './InputTime.js';
 import { Tabs } from 'antd';
+import 'antd/dist/antd.css';
+import './index.css';
+
+
 const { TabPane } = Tabs;
+
 
 function callback(key) {
     console.log(key);

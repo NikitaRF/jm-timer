@@ -12,6 +12,14 @@ code {
     monospace;
 }
 
+.ant-tabs-nav .ant-tabs-tab {
+  margin-left: 10px;
+}
+
+.ant-slider{
+  margin-left: 20px;
+}
+
 .button {
   margin: 10px;
 }
@@ -48,3 +56,4 @@ code {
 .conclusionTime__item--time {
   font-size: 60px;
 }
+

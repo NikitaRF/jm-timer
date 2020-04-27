@@ -1,7 +1,5 @@
 import React from 'react';
-import './App.css';
 import { Button } from 'antd';
-import 'antd/dist/antd.css';
 
 class App extends React.Component {
   constructor(props) {
