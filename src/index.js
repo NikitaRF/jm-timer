@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Tabs } from 'antd';
-import App from './App';
+import Stopwatch from './Stopwatch';
 import * as serviceWorker from './serviceWorker';
-import InputTime from './InputTime';
+import Countdown from './Countdown';
 import 'antd/dist/antd.css';
 import './index.css';
 
@@ -18,10 +18,10 @@ function callback(key) {
 ReactDOM.render(
   <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Секундомер" key="1">
-      <App />
+      <Stopwatch />
     </TabPane>
     <TabPane tab="Таймер" key="2">
-      <InputTime />
+      <Countdown />
     </TabPane>
   </Tabs>,
 
