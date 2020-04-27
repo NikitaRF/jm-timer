@@ -38,29 +38,17 @@ class Countdown extends React.Component {
       e.target.select();
     };
 
-    blockInput = () => {
-      const inputs = document.querySelectorAll('.timeInput');
-      for (const i of inputs) {
-        if (i.getAttribute('disabled') == null && i.classList.contains('timeInput--block') === false) {
-          i.setAttribute('disabled', 'disabled');
-          i.classList.add('timeInput--block');
-        } else {
-          i.removeAttribute('disabled');
-          i.classList.remove('timeInput--block');
-        }
-      }
-    }
 
     startCountdown = () => {
-      this.blockInput();
       const { timerStartTime, inputValueSec } = this.state;
       if (timerStartTime === null) {
         this.setState({
           timerStartTime: inputValueSec,
+          startTimer: true,
         });
       } else {
         this.setState({
-          timerStartTime: null,
+          startTimer: false,
         });
       }
 
@@ -85,7 +73,7 @@ class Countdown extends React.Component {
     }
 
     secDec = () => {
-      const { inputValueSec } = this.state;
+      const { inputValueSec, startTimer } = this.state;
 
       if (inputValueSec === 0) {
         console.log('Время вышло!!!');
@@ -95,6 +83,7 @@ class Countdown extends React.Component {
         clearInterval(this.timerId);
         this.timerId = undefined;
         this.setState({
+          startTimer: false,
           timerStartTime: null,
         });
       } else {
@@ -132,7 +121,7 @@ class Countdown extends React.Component {
     }
 
     render() {
-      const { inputValueSec, timerStartTime } = this.state;
+      const { inputValueSec, timerStartTime, startTimer } = this.state;
       const min = Math.floor(inputValueSec / 60);
       const sec = inputValueSec - (min * 60);
       const percent = 100 - Math.floor(inputValueSec * 100 / timerStartTime);
@@ -157,7 +146,7 @@ class Countdown extends React.Component {
               onChange={this.incMin}
               type="text"
               disabled={
-                timerStartTime == null ? '' : 'disabled'
+                startTimer == false ? '' : 'disabled'
               }
               value={
                         timerStartTime == null ? min : Math.floor(timerStartTime / 60)
@@ -171,7 +160,7 @@ class Countdown extends React.Component {
               onChange={this.incSec}
               type="text"
               disabled={
-                timerStartTime == null ? '' : 'disabled'
+                startTimer == false ? '' : 'disabled'
               }
               value={
                         timerStartTime == null ? sec : timerStartTime - (min * 60)
