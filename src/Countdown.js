@@ -121,7 +121,7 @@ class Countdown extends React.Component {
     }
 
     render() {
-      const { inputValueSec, timerStartTime, startTimer } = this.state;
+      const { inputValueSec, timerStartTime } = this.state;
       const min = Math.floor(inputValueSec / 60);
       const sec = inputValueSec - (min * 60);
       const percent = 100 - Math.floor(inputValueSec * 100 / timerStartTime);
@@ -178,7 +178,7 @@ class Countdown extends React.Component {
                 max={3600}
                 step={15}
                 onChange={this.onChangeSec}
-                value={typeof inputValueSec === 'number' ? inputValueSec : 0}
+                value={timerStartTime === null ? inputValueSec : timerStartTime}
               />
             </Col>
 
