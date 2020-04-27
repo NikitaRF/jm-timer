@@ -53,10 +53,10 @@ class Countdown extends React.Component {
 
     startCountdown = () => {
       this.blockInput();
-      const { timerStartTime } = this.state;
+      const { timerStartTime, inputValueSec } = this.state;
       if (timerStartTime === null) {
         this.setState({
-          timerStartTime: this.state.inputValueSec,
+          timerStartTime: inputValueSec,
         });
       } else {
         this.setState({
@@ -74,14 +74,7 @@ class Countdown extends React.Component {
     }
 
     stopCountdown = () => {
-      const inputs = document.querySelectorAll('.timeInput');
-      for (const i of inputs) {
-        if (i.getAttribute('disabled') !== null && i.classList.contains('timeInput--block') === true) {
-          i.removeAttribute('disabled');
-          i.classList.remove('timeInput--block');
-        }
-      }
-
+      const { inputValueSec } = this.state;
       clearInterval(this.timerId);
       this.timerId = undefined;
       this.setState({
@@ -98,16 +91,9 @@ class Countdown extends React.Component {
         console.log('Время вышло!!!');
         const audio = new Audio(sound);
         audio.play();
-        this.StartPlaySound();
+        this.startPlaySound();
         clearInterval(this.timerId);
         this.timerId = undefined;
-        const inputs = document.querySelectorAll('.timeInput');
-        for (const i of inputs) {
-          if (i.getAttribute('disabled') !== null && i.classList.contains('timeInput--block') === true) {
-            i.removeAttribute('disabled');
-            i.classList.remove('timeInput--block');
-          }
-        }
         this.setState({
           timerStartTime: null,
         });
@@ -134,7 +120,7 @@ class Countdown extends React.Component {
       }
     }
 
-    StartPlaySound = () => {
+    startPlaySound = () => {
       this.soundId = setInterval(this.playSound, 2100);
     }
 
@@ -163,6 +149,9 @@ class Countdown extends React.Component {
               onClick={this.handleSelect}
               onChange={this.incMin}
               type="text"
+              disabled={
+                timerStartTime == null ? '' : 'disabled'
+              }
               value={
                         timerStartTime == null ? min : Math.floor(timerStartTime / 60)
                     }
@@ -174,6 +163,9 @@ class Countdown extends React.Component {
               onClick={this.handleSelect}
               onChange={this.incSec}
               type="text"
+              disabled={
+                timerStartTime == null ? '' : 'disabled'
+              }
               value={
                         timerStartTime == null ? sec : timerStartTime - (min * 60)
                     }
