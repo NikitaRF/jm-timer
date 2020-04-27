@@ -120,6 +120,13 @@ class Countdown extends React.Component {
       return item;
     }
 
+    sliderValueRestriction = (inputValueSec) => {
+      if (inputValueSec >= 3600) {
+        return 3600;
+      }
+      return inputValueSec;
+    }
+
     render() {
       const { inputValueSec, timerStartTime } = this.state;
       const min = Math.floor(inputValueSec / 60);
@@ -174,11 +181,11 @@ class Countdown extends React.Component {
                 min={0}
                 disabled={
                                 timerStartTime == null ? '' : 'disabled'
-                            }
+                          }
                 max={3600}
                 step={15}
                 onChange={this.onChangeSec}
-                value={timerStartTime === null ? inputValueSec : timerStartTime}
+                value={timerStartTime === null ? this.sliderValueRestriction(inputValueSec) : timerStartTime}
               />
             </Col>
 
