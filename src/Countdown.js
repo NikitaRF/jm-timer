@@ -163,7 +163,7 @@ class Countdown extends React.Component {
                 timerStartTime == null ? '' : 'disabled'
               }
               value={
-                        timerStartTime == null ? sec : timerStartTime - (min * 60)
+                        timerStartTime == null ? sec : timerStartTime - (Math.floor(timerStartTime / 60) * 60)
                     }
             />
           </div>
