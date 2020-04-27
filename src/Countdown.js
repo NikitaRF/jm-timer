@@ -146,7 +146,7 @@ class Countdown extends React.Component {
               onChange={this.incMin}
               type="text"
               disabled={
-                startTimer == false ? '' : 'disabled'
+                timerStartTime == null ? '' : 'disabled'
               }
               value={
                         timerStartTime == null ? min : Math.floor(timerStartTime / 60)
@@ -160,7 +160,7 @@ class Countdown extends React.Component {
               onChange={this.incSec}
               type="text"
               disabled={
-                startTimer == false ? '' : 'disabled'
+                timerStartTime == null ? '' : 'disabled'
               }
               value={
                         timerStartTime == null ? sec : timerStartTime - (min * 60)
