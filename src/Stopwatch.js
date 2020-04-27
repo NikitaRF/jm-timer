@@ -51,6 +51,13 @@ class Stopwatch extends React.Component {
     });
   }
 
+  formatNumber = (item) => {
+    if (String(item).length < 2) {
+      return 0 + String(item);
+    }
+    return item;
+  }
+
 
   render() {
     const { min, sec, mSec } = this.state;
@@ -58,11 +65,11 @@ class Stopwatch extends React.Component {
     return (
       <div>
         <div className="time">
-          {min}
+          {this.formatNumber(min)}
           {' '}
           :
           {' '}
-          {sec}
+          {this.formatNumber(sec)}
           {' '}
           :
           {' '}

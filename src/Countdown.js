@@ -124,6 +124,13 @@ class Countdown extends React.Component {
       this.soundId = setInterval(this.playSound, 2100);
     }
 
+    formatNumber = (item) => {
+      if (String(item).length < 2) {
+        return 0 + String(item);
+      }
+      return item;
+    }
+
     render() {
       const { inputValueSec, timerStartTime } = this.state;
       const min = Math.floor(inputValueSec / 60);
@@ -134,11 +141,11 @@ class Countdown extends React.Component {
         <div>
           <div className="conclusionTime">
             <div className="conclusionTime__item conclusionTime__item--time">
-              {min}
+              {this.formatNumber(min)}
               {' '}
               :
               {' '}
-              {sec}
+              {this.formatNumber(sec)}
             </div>
             <Progress type="circle" percent={percent} />
           </div>
