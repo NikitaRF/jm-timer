@@ -37,7 +37,6 @@ class Countdown extends React.Component {
       event.target.select();
     };
 
-
     startCountdown = () => {
       const { timerStartTime, inputValueSec } = this.state;
       if (timerStartTime === null) {
