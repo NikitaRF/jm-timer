@@ -88,6 +88,7 @@ class Countdown extends React.Component {
       audio.play();
 
       this.setState({ countOfPlay: countOfPlay + 1 });
+
       if (countOfPlay === 2) {
         this.setState({ countOfPlay: 1 });
         clearInterval(this.soundId);
