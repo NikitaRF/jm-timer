@@ -10,7 +10,6 @@ import sound from './audio/alarm.mp3';
 class Countdown extends React.Component {
     state = {
       inputValueSec: 0,
-      startTimer: false,
       timerStartTime: null,
       countOfPlay: 1,
     };
@@ -21,21 +20,22 @@ class Countdown extends React.Component {
       });
     };
 
-    incMin = (e) => {
-      let min = Number(e.target.value);
+    incMin = (event) => {
+      let min = Number(event.target.value);
       if (min > 720) {
         min = 720;
       }
-      this.setState(({ inputValueSec }) => ({ inputValueSec: inputValueSec % 60 + min * 60 }));
+      this.setState(({ inputValueSec }) => ({ inputValueSec: (inputValueSec % 60) + (min * 60) }));
     }
 
-    incSec = (e) => {
-      const sec = Number(e.target.value);
-      this.setState(({ inputValueSec }) => ({ inputValueSec: Math.floor(inputValueSec / 60) * 60 + sec }));
+    incSec = (event) => {
+      const sec = Number(event.target.value);
+      this.setState(({ inputValueSec }) => (
+        { inputValueSec: Math.floor(inputValueSec / 60) * 60 + sec }));
     }
 
-    handleSelect = (e) => {
-      e.target.select();
+    handleSelect = (event) => {
+      event.target.select();
     };
 
 
@@ -44,15 +44,8 @@ class Countdown extends React.Component {
       if (timerStartTime === null) {
         this.setState({
           timerStartTime: inputValueSec,
-          startTimer: true,
-        });
-      } else {
-        this.setState({
-          startTimer: false,
         });
       }
-
-
       if (this.timerId) {
         clearInterval(this.timerId);
         this.timerId = undefined;
@@ -62,18 +55,16 @@ class Countdown extends React.Component {
     }
 
     stopCountdown = () => {
-      const { inputValueSec } = this.state;
       clearInterval(this.timerId);
       this.timerId = undefined;
       this.setState({
         inputValueSec: 0,
-        startTimer: false,
         timerStartTime: null,
       });
     }
 
     secDec = () => {
-      const { inputValueSec, startTimer } = this.state;
+      const { inputValueSec } = this.state;
 
       if (inputValueSec === 0) {
         console.log('Время вышло!!!');
@@ -83,7 +74,6 @@ class Countdown extends React.Component {
         clearInterval(this.timerId);
         this.timerId = undefined;
         this.setState({
-          startTimer: false,
           timerStartTime: null,
         });
       } else {
@@ -98,7 +88,6 @@ class Countdown extends React.Component {
       console.log('Время вышло!!!');
       const audio = new Audio(sound);
       audio.play();
-
 
       this.setState({ countOfPlay: countOfPlay + 1 });
 
@@ -127,12 +116,11 @@ class Countdown extends React.Component {
       return inputValueSec;
     }
 
-
     render() {
       const { inputValueSec, timerStartTime } = this.state;
       const min = Math.floor(inputValueSec / 60);
       const sec = inputValueSec - (min * 60);
-      const percent = 100 - Math.floor(inputValueSec * 100 / timerStartTime);
+      const percent = 100 - Math.floor((inputValueSec * 100) / timerStartTime);
 
       return (
         <div>
@@ -171,8 +159,10 @@ class Countdown extends React.Component {
                 timerStartTime == null ? '' : 'disabled'
               }
               value={
-                        timerStartTime == null ? sec : timerStartTime - (Math.floor(timerStartTime / 60) * 60)
-                    }
+                timerStartTime == null ? sec : (
+                  timerStartTime - (Math.floor(timerStartTime / 60) * 60)
+                )
+              }
             />
           </div>
 
@@ -180,13 +170,15 @@ class Countdown extends React.Component {
             <Col span={12}>
               <Slider
                 min={0}
-                disabled={
-                                timerStartTime == null ? '' : 'disabled'
-                          }
+                disabled={timerStartTime == null ? '' : 'disabled'}
                 max={3600}
                 step={15}
                 onChange={this.onChangeSec}
-                value={timerStartTime === null ? this.sliderValueRestriction(inputValueSec) : timerStartTime}
+                value={
+                  timerStartTime === null ? this.sliderValueRestriction(inputValueSec) : (
+                    timerStartTime
+                  )
+                }
               />
             </Col>
 
