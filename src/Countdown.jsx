@@ -34,9 +34,7 @@ class Countdown extends React.Component {
     }
 
     handleSelect = (event) => {
-                event.target.select()
-      let z
-
+      event.target.select();
     };
 
     startCountdown = () => {
