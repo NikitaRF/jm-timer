@@ -1,6 +1,5 @@
 import React from 'react';
 import { Slider, Row, Col, Button, Progress } from 'antd';
-
 import sound from './audio/alarm.mp3';
 
 class Countdown extends React.Component {
@@ -126,7 +125,7 @@ class Countdown extends React.Component {
       <div>
         <div className="conclusionTime">
           <div className="conclusionTime__item conclusionTime__item--time">
-            {this.formatNumber(min)} : {this.formatNumber(sec)}
+            {this.formatNumber(min)} :{this.formatNumber(sec)}
           </div>
           <Progress type="circle" percent={percent} />
         </div>
