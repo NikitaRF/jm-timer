@@ -10,13 +10,8 @@ import './index.css';
 
 const { TabPane } = Tabs;
 
-
-function callback(key) {
-  console.log(key);
-}
-
 ReactDOM.render(
-  <Tabs defaultActiveKey="1" onChange={callback}>
+  <Tabs defaultActiveKey="1">
     <TabPane tab="Секундомер" key="1">
       <Stopwatch />
     </TabPane>

@@ -67,7 +67,6 @@ class Countdown extends React.Component {
       const { inputValueSec } = this.state;
 
       if (inputValueSec === 0) {
-        console.log('Время вышло!!!');
         const audio = new Audio(sound);
         audio.play();
         this.startPlaySound();
@@ -85,7 +84,6 @@ class Countdown extends React.Component {
 
     playSound = () => {
       const { countOfPlay } = this.state;
-      console.log('Время вышло!!!');
       const audio = new Audio(sound);
       audio.play();
 
