@@ -46,7 +46,7 @@
   "lint-staged": {
     "*.{js, jsx}": [
       "prettier --write",
-      "npm run lint",
+      "eslint",
       "git add"
     ]
   }
