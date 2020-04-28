@@ -3,7 +3,6 @@ import {
   Slider, Row, Col, Button, Progress,
 } from 'antd';
 
-
 import sound from './audio/alarm.mp3';
 
 
