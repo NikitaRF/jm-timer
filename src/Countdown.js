@@ -121,7 +121,13 @@ class Countdown extends React.Component {
       const min = Math.floor(inputValueSec / 60);
       const sec = inputValueSec - (min * 60);
       const percent = 100 - Math.floor((inputValueSec * 100) / timerStartTime);
-
+      const classNameBlockInput = 'timeInput timeInput--block';
+      const returnClassInput = () => {
+        if (timerStartTime === null) {
+          return 'timeInput';
+        }
+        return classNameBlockInput;
+      };
       return (
         <div>
           <div className="conclusionTime">
@@ -137,7 +143,7 @@ class Countdown extends React.Component {
           <div className="conclusionTime__item">
             {/* min */}
             <input
-              className="timeInput"
+              className={returnClassInput()}
               onClick={this.handleSelect}
               onChange={this.incMin}
               type="text"
@@ -151,7 +157,7 @@ class Countdown extends React.Component {
             <span> : </span>
             {/* sec */}
             <input
-              className="timeInput"
+              className={returnClassInput()}
               onClick={this.handleSelect}
               onChange={this.incSec}
               type="text"

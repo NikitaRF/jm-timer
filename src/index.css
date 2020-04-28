@@ -20,15 +20,7 @@ code {
   margin-left: 20px;
 }
 
-.button {
-  margin: 10px;
-}
-
-.time {
-  margin: 10px 0 0 30px;
-  color: #2E8AFA;
-  font-size: 60px;
-}
+/* Стили таймера */
 
 .conclusionTime{
   display: flex;
@@ -57,6 +49,19 @@ code {
   font-size: 60px;
 }
 
+/* Стили секундомера */
+
 .mSec{
   font-size: 45px;
 }
+
+.time {
+  margin: 10px 0 0 30px;
+  color: #2E8AFA;
+  font-size: 60px;
+}
+
+.button {
+  margin: 10px;
+}
+
