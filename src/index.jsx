@@ -7,7 +7,6 @@ import Countdown from './Countdown';
 import 'antd/dist/antd.css';
 import './index.css';
 
-
 const { TabPane } = Tabs;
 
 ReactDOM.render(
@@ -19,10 +18,8 @@ ReactDOM.render(
       <Countdown />
     </TabPane>
   </Tabs>,
-
-  document.getElementById('root'),
+  document.getElementById('root')
 );
-
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

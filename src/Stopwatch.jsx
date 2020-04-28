@@ -18,7 +18,7 @@ class Stopwatch extends React.Component {
     } else {
       this.timerId = setInterval(this.mSecInc, 10);
     }
-  }
+  };
 
   stop = () => {
     clearInterval(this.timerId);
@@ -28,8 +28,7 @@ class Stopwatch extends React.Component {
       sec: 0,
       mSec: 0,
     });
-  }
-
+  };
 
   mSecInc = () => {
     let { mSec, sec, min } = this.state;
@@ -49,21 +48,21 @@ class Stopwatch extends React.Component {
       sec,
       mSec: mSec + 10,
     });
-  }
+  };
 
   formatNumber = (item) => {
     if (String(item).length < 2) {
       return 0 + String(item);
     }
     return item;
-  }
+  };
 
   formatNumberMsec = (item) => {
     if (item === 0) {
       return String('00') + item;
     }
     return item;
-  }
+  };
 
   render() {
     const { min, sec, mSec } = this.state;
@@ -71,14 +70,7 @@ class Stopwatch extends React.Component {
     return (
       <div>
         <div className="time">
-          {this.formatNumber(min)}
-          {' '}
-          :
-          {' '}
-          {this.formatNumber(sec)}
-          {' '}
-          :
-          {' '}
+          {this.formatNumber(min)} : {this.formatNumber(sec)} :{' '}
           <span className="mSec">{this.formatNumberMsec(mSec)}</span>
         </div>
         <Button className="button" onClick={this.start} type="primary" size="small">

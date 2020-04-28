@@ -20,7 +20,7 @@
     "precommit": "lint-staged",
     "lint": "eslint src/",
     "lint:write": "eslint src/ --fix",
-    "prettier": "prettier --write src/**/*.js"
+    "prettier": "prettier --write src/**/*.jsx"
   },
   "eslintConfig": {
     "extends": "react-app"
