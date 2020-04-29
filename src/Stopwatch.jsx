@@ -70,7 +70,13 @@ class Stopwatch extends React.Component {
     return (
       <div>
         <div className="time">
-          {this.formatNumber(min)} : {this.formatNumber(sec)} :{' '}
+          {this.formatNumber(min)}
+          {' '}
+          :
+          {this.formatNumber(sec)}
+          {' '}
+          :
+          {' '}
           <span className="mSec">{this.formatNumberMsec(mSec)}</span>
         </div>
         <Button className="button" onClick={this.start} type="primary" size="small">
